@@ -32,18 +32,30 @@ else
 fi
 
 echo "=============Disable default redis===================="
-dnf module disable redis -y 
+dnf module disable redis -y &>>$LOGFILE_NAME
 VALIDATION $? "Disbaling default redis"
 
 echo "=============Enable redis version 7==================="
-dnf module enable redis:7 -y
+dnf module enable redis:7 -y &>>$LOGFILE_NAME
 VALIDATION $? "Enabling redis version 7"
 
 echo "===========Install redis==================="
-dnf install redis -y 
+dnf install redis -y &>>$LOGFILE_NAME
 VALIDATION $? "Installing redis"
 
 echo "===========Update redis configuration file========"
 cd /etc/redis
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
+sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf 
+#in the above sed command -i is for making the changes in file and -e is for each expression and c means change
+#if we have a single expression we can use sed -i <expression> <file>
+#if we have multiple sed -i -e <exp1> -e <exp2> -e <exp3> <file> ---> so all the changes under each expressions are updated in the file
 VALIDATION $? "Updating redis configuration file"
+
+echo "==============Start the redis Service==================="
+systemctl enable redis
+systemctl start redis
+VALIDATION $? "Starting REDIS service"
+
+END_TIME=$(date +%s)
+TOTAL_TIME=$(($END_TIME-$START_TIME))
+echo "Time taken for the script is $TOTAL_TIME ms"

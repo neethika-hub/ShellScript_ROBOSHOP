@@ -64,7 +64,7 @@ rm -rf /app/*
 cp /tmp/catalogue.zip /app
 unzip catalogue.zip &>>$LOGFILE_NAME
 VALIDATION $? "Downloaded and unzipped Catalogue application code"
-rm -rf catalogue.zip
+rm -rf *.zip
 
 echo "=================Download NODEJS Dependencies============================"
 npm install &>>$LOGFILE_NAME
