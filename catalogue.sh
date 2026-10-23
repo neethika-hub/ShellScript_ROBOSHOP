@@ -92,10 +92,10 @@ echo "===============Load Master Data====================="
 STATUS=$(mongosh --host mongodb.shynudevops.shop --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 if [ $STATUS -lt 0 ]
 then
-    mongosh --host mongodb.shynudevops.shop < /app/db/master-data.js &>>$LOG_FILENAME
+    mongosh --host mongodb.shynudevops.shop < /app/db/master-data.js &>>$LOGFILE_NAME
     VALIDATION $? "Loading Data into mongodb"
 else
-    echo "Data is already loaded" | tee -a $LOG_FILENAME
+    echo "Data is already loaded" | tee -a $LOGFILE_NAME
 fi
 
 END_TIME=$(date +%s)
