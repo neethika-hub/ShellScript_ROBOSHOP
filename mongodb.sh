@@ -45,6 +45,5 @@ systemctl start mongod
 Validation $? "Starting mongodb"
 
 echo "===========Updating listen address============"
-cd /etc
-cp mongod.conf mongod.conf_backup_$time
+cp /etc/mongod.conf /etc/mongod.conf_backup_$time
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
