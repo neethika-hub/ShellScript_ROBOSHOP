@@ -25,7 +25,7 @@ then
     echo "You are not in ROOT. Please switch to ROOT"
     exit 1
 else
-    echo "You are in ROOT."
+    echo "You are in ROOT." | tee -a $logfile_name
 fi
 
 
