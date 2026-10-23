@@ -16,5 +16,20 @@ do
         IP=$(aws ec2 describe-instances --instance-ids $Instance_ID --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
         Record_Name=$instance.$DNS_Name
     fi
-    echo "$instance IP Address in $IP"   
+    echo "$instance IP Address is $IP"
+    aws route53 change-resource-record-sets --hosted-zone-id $HostedZone_ID --change-batch '
+    {
+        "Comment": "Creating or Updating a record set"
+        ,"Changes": [{
+        "Action"              : "UPSERT"
+        ,"ResourceRecordSet"  : {
+            "Name"              : "'$Record_Name'"
+            ,"Type"             : "A"
+            ,"TTL"              : 1
+            ,"ResourceRecords"  : [{
+                "Value"         : "'$IP'"
+            }]
+        }
+        }]
+    }'
 done
