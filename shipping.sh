@@ -77,7 +77,7 @@ systemctl start shipping
 VALIDATION $? "Starting Shipping Application"
 
 echo "==============Install MySQL Client to Load the Schema============"
-dnf isntall mysql -y &>>$LOGFILE_NAME
+dnf install mysql -y &>>$LOGFILE_NAME
 VALIDATION $? "MySQL Client Instalaltion"
 
 echo "====================LOAD Data==============================="
