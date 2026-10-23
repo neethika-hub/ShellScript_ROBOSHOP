@@ -9,7 +9,11 @@ SCRIPT_PATH=$PWD
 TIME=$(date +%F-%H:%M:%S)
 START_TIME=$(date +%s)
 echo "Script started at $START_TIME"
-Validation(){
+
+mkdir -p $LOG_FOLDER #-p will create if folder is not present or it will ignore if already present
+
+
+VALIDATION(){
 if [ $1 -ne 0 ]
 then
     echo "$2 is FAILED" | tee -a $LOGFILE_NAME
@@ -19,9 +23,6 @@ else
 fi
 }
 
-echo "===========Creating log folder if not exists=========="
-mkdir -p $LOG_FOLDER #-p will create if folder is not present or it will ignore if already present
-Validation $? "Creation of logfolder $LOG_FOLDER"
 
 echo "==========Check if we are running with ROOT==========="
 if [ $USER_ID -ne 0 ]
@@ -34,25 +35,25 @@ fi
 
 echo "===========Copy repo file to repo directory==========="
 cp $SCRIPT_PATH/mongo.repo /etc/yum.repos.d/mongo.repo
-Validation $? "Placing mongo.repo"
+VALIDATION $? "Placing mongo.repo"
 
 echo "==========Installing mongodb================"
 dnf install mongodb-org -y &>>$LOGFILE_NAME
-Validation $? "Installation of mongodb"
+VALIDATION $? "Installation of mongodb"
 
 echo "=======Starting mongodb================="
 systemctl enable mongod
 systemctl start mongod
-Validation $? "Starting mongodb"
+VALIDATION $? "Starting mongodb"
 
 echo "===========Updating listen address============"
 cp /etc/mongod.conf /etc/mongod.conf_backup_$TIME
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
-Validation $? "Listen update address"
+VALIDATION $? "Listen update address"
 
 echo "==========Restart mongodb===================="
 systemctl restart mongod
-Validation $? "Mongodb restart"
+VALIDATION $? "Mongodb restart"
 
 END_TIME=$(date +%s)
 echo "$END_TIME"
