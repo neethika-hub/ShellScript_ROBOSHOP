@@ -32,4 +32,5 @@ do
         }
         }]
     }'
+    echo "Updated $IP for $instance in ROUTE53"
 done
