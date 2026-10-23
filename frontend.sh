@@ -50,7 +50,7 @@ systemctl start nginx
 echo "===============Download Frontend Application code and UNZIP=================="
 cd /usr/share/nginx/html
 rm -rf /usr/share/nginx/html/*
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>>$LOGFILE_NAME
 cp /tmp/frontend.zip /usr/share/nginx/html
 unzip frontend.zip &>>$LOGFILE_NAME
 VALIDATION $? "Downloading and Unzipping"

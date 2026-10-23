@@ -58,7 +58,7 @@ else
 fi
 
 echo "============Download application code to the created app directory=================="
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOGFILE_NAME
 cd /app
 rm -rf /app/*
 cp /tmp/catalogue.zip /app
