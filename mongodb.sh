@@ -29,4 +29,7 @@ else
     echo "You are in ROOT." | tee -a $logfile_name
 fi
 
+echo "Copy repo file to repo directory"
+cp mongo.repo /etc/yum.repos.d/mongo.repo
+Validation $? "Placing mongo.repo"
 
