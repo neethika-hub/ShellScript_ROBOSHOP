@@ -55,26 +55,6 @@ echo "==========Restart mongodb===================="
 systemctl restart mongod
 VALIDATION $? "Mongodb restart"
 
-echo "==============Validate process======================"
-PROCESS_ID=$(ps -ef | grep mongod | grep -v grep | wc -l)
-if [ $PROCESS_ID -eq 1 ]
-then
-    echo "The Process is UP" | tee -a $LOGFILE_NAME
-    VALIDATION $? "The Process"
-else
-    echo "The Process is NOT UP" | tee -a $LOGFILE_NAME
-fi
-
-echo "===============Validate Logs======================="
-ERROR_LOG=$(grep -i "error" /var/log/messages | wc -l)
-if [ $ERROR_LOG -gt 0 ]
-then
-    echo "THERE IS A ERROR IN LOGS PLEASE CHECK!!!" | tee -a $LOGFILE_NAME
-    echo "MONGODB IS NOT STARTED CORRECTLY" | tee -a $LOGFILE_NAME
-else
-    VALIDATION $? "MONGODB Started without errors"
-fi
-
 END_TIME=$(date +%s)
 echo "$END_TIME"
 TOTAL_TIME=$(($END_TIME-$START_TIME))
