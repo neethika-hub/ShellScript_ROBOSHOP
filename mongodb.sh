@@ -17,6 +17,7 @@ fi
 
 echo "===========Creating log folder if not exists=========="
 mkdir -p $log_folder #-p will create if folder is not present or it will ignore if already present
+Validation $? "Creation of logfolder $log_folder"
 
 echo "==========Check if we are running with ROOT==========="
 if [ $user_id -ne 0 ]
