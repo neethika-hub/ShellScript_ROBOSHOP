@@ -7,7 +7,7 @@ LOGFILE_NAME=$LOG_FOLDER/$LOGFILE.log
 echo $LOGFILE_NAME
 SCRIPT_PATH=$PWD
 TIME=$(date +%F-%H:%M:%S)
-START_TIME=$(date +%S)
+START_TIME=$(date +%s)
 echo "Script started at $START_TIME"
 Validation(){
 if [ $1 -ne 0 ]
@@ -54,6 +54,6 @@ echo "==========Restart mongodb===================="
 systemctl restart mongod
 Validation $? "Mongodb restart"
 
-ENDT_IME=$(date +%S)
+ENDT_IME=$(date +%s)
 TOTAL_TIME=$(($END_TIME-$START_TIME))
 echo "Total time taken for the script is $TOTAL_TIME ms" | tee -a $LOGFILE_NAME
