@@ -5,6 +5,8 @@ log_folder=/var/log/roboshop
 logfile=$(echo $0 | cut -d '.' -f1)
 logfile_name=$log_folder/$logfile.log
 echo $logfile_name
+path=$PWD
+echo "$path"
 time=$(date +%F-%H:%M:%S)
 started_time=$(date +%S)
 echo "Script started at $started_time"
@@ -32,7 +34,7 @@ else
 fi
 
 echo "===========Copy repo file to repo directory==========="
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp $path/mongo.repo /etc/yum.repos.d/mongo.repo
 Validation $? "Placing mongo.repo"
 
 echo "==========Installing mongodb================"
