@@ -11,10 +11,10 @@ echo "Script started at $started_time"
 Validation(){
 if [ $1 -ne 0 ]
 then
-    echo "$2 is FAILED"
+    echo "$2 is FAILED" | tee -a $logfile_name
     exit 1
 else
-    echo "$2 is SUCCESS"
+    echo "$2 is SUCCESS" | tee -a $logfile_name
 fi
 }
 
@@ -25,7 +25,7 @@ Validation $? "Creation of logfolder $log_folder"
 echo "==========Check if we are running with ROOT==========="
 if [ $user_id -ne 0 ]
 then
-    echo "You are not in ROOT. Please switch to ROOT"
+    echo "You are not in ROOT. Please switch to ROOT" | tee -a $logfile_name
     exit 1
 else
     echo "You are in ROOT." | tee -a $logfile_name
@@ -36,7 +36,7 @@ cp mongo.repo /etc/yum.repos.d/mongo.repo
 Validation $? "Placing mongo.repo"
 
 echo "==========Installing mongodb================"
-dnf install mongodb-org -y
+dnf install mongodb-org -y &>>$logfile_name
 Validation $? "Installation of mongodb"
 
 echo "=======Starting mongodb================="
@@ -55,4 +55,4 @@ Validation $? "Mongodb restart"
 
 end_time=$(date +%S)
 total_time=$(($end_time-$started_time))
-echo "Total time taken for the script is $total_time ms"
+echo "Total time taken for the script is $total_time ms" | tee -a $logfile_name
