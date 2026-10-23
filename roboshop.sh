@@ -7,6 +7,6 @@ HostedZone_ID="Z0234269167B6OYW6YW44"
 DNS_Name="shynudevops.shop"
 for instance in ${Instances[@]}
 do
-    Instance_ID=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t3.micro --security-group-ids $SecurityGroup_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]" --query "Instances[0].InstanceId" --output text))
+    Instance_ID=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t3.micro --security-group-ids $SecurityGroup_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]" --query "Instances[0].InstanceId" --output text)
     echo $Instance_ID
 done
