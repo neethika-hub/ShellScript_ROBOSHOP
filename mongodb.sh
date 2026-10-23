@@ -56,4 +56,4 @@ Validation $? "Mongodb restart"
 
 ENDT_IME=$(date +%S)
 TOTAL_TIME=$(($END_TIME-$START_TIME))
-echo "Total time taken for the script is $total_time ms" | tee -a $LOGFILE_NAME
+echo "Total time taken for the script is $TOTAL_TIME ms" | tee -a $LOGFILE_NAME
