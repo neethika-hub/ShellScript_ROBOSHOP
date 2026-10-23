@@ -32,5 +32,5 @@ do
         }
         }]
     }'
-    echo "Updated $IP for $instance in ROUTE53"
+    echo "Updated $IP for $instance in ROUTE53 $Record_Name"
 done
