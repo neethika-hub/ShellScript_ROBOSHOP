@@ -60,6 +60,8 @@ fi
 echo "============Download application code to the created app directory=================="
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
 cd /app
+mkdir -p $FILE_NAME_$TIME
+mv /app/* /app/$FILE_NAME_$TIME
 cp /tmp/catalogue.zip /app
 unzip catalogue.zip &>>$LOGFILE_NAME
 VALIDATION $? "Downloaded and unzipped Catalogue application code"
@@ -100,5 +102,3 @@ fi
 END_TIME=$(date +%s)
 TOTAL_TIME=$(($END_TIME-$START_TIME))
 echo "Time taken for the script is $TOTAL_TIME ms"
-
-
