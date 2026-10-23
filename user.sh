@@ -80,6 +80,26 @@ systemctl enable user
 systemctl start user
 VALIDATION $? "Starting User Service"
 
+echo "==============Validate process======================"
+PROCESS_ID=$(ps -ef | grep /app/server.js | grep -v grep | wc -l)
+if [ $PROCESS_ID -eq 1 ]
+then
+    echo "The Process is UP"
+else
+    echo "The Process is NOT UP"
+fi
+
+echo "===============Validate Logs======================="
+ERROR_LOG=$(grep -i "error" /var/log/message | wc -l)
+if [ $ERROR_LOG -gt 0 ]
+then
+    echo "THERE IS A ERROR IN LOGS PLEASE CHECK!!!"
+    echo "APPLCIATION IS NOT STARTED CORRECTLY"
+else
+    echo "NO ERROR IN LOGS"
+    echo "APPLICATION STARTED PERFECTLY!!HURRAY!!"
+fi
+
 END_TIME=$(date +%s)
 TOTAL_TIME=$(($END_TIME-$START_TIME))
 echo "Time taken for the script is $TOTAL_TIME ms"

@@ -1,0 +1,13 @@
+[Unit]
+Description="Cart Service"
+
+[Service]
+user=roboshop
+Environment=REDIS_HOST=redis.shynudevops.shop
+Environment=CATALOGUE_HOST=catalogue.shynudevops.shop
+Environment=CATALOGUE_PORT=8080
+ExecStart=/bin/node /app/server.js
+SyslogIdentifier=cart
+
+[Install]
+WantedBy=multi-user.target
