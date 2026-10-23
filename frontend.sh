@@ -32,15 +32,15 @@ else
 fi
 
 echo "============Disable default NGINX==============="
-dnf module disable nginx -y
+dnf module disable nginx -y &>>LOG_FILENAME
 VALIDATION $? "Disbaling Default NGINX"
 
 echo "==============Enable NGINX 1.24================="
-dnf module enable nginx:1.24 -y
+dnf module enable nginx:1.24 -y &>>LOG_FILENAME
 VALIDATION $? "Enabling 1.24 NGINX"
 
 echo "==============Install NGINX==================="
-dnf install nginx -y 
+dnf install nginx -y &>>LOG_FILENAME
 VALIDATION $? "Installaing NGINX"
 
 echo "==============start NGINX=================="
@@ -53,7 +53,7 @@ mkdir -p $FILE_NAME_$TIME
 mv /usr/share/nginx/html/* /usr/share/nginx/html/$FILE_NAME_$TIME
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
 cp /tmp/frontend.zip /usr/share/nginx/html
-unzip frontend.zip
+unzip frontend.zip &>>LOG_FILENAME
 VALIDATION $? "Downloading and Unzipping"
 rm -rf /usr/share/nginx/html/frontend.zip
 
