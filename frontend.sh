@@ -3,7 +3,7 @@
 USER_ID=$(id -u)
 LOG_FOLDER=/var/log/roboshop
 FILE_NAME=$(echo $0 | cut -d '.' -f1)
-LOG_FILENAME=$LOG_FOLDER/$FILE_NAME.log
+LOGFILE_NAME=$LOG_FOLDER/$FILE_NAME.log
 TIME=$(date +%F-%H:%M:%S)
 SCRIPT_PATH=$PWD
 START_TIME=$(date +%s)
