@@ -13,7 +13,7 @@ do
         IP=$(aws ec2 describe-instances --instance-ids $Instance_ID --query "Reservations[0].Instances[0].PrivateIpAddress" --output text)
         Record_Name=$instance.$DNS_Name
     else
-        IP=$(aws ec2 describe-instances --insrance-ids $Instance_ID --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+        IP=$(aws ec2 describe-instances --instance-ids $Instance_ID --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
         Record_Name=$instance.$DNS_Name
     fi
     echo "$instance IP Address in $IP"   
