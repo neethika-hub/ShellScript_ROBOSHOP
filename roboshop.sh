@@ -8,5 +8,13 @@ DNS_Name="shynudevops.shop"
 for instance in ${Instances[@]}
 do
     Instance_ID=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t3.micro --security-group-ids $SecurityGroup_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]" --query "Instances[0].InstanceId" --output text)
-    echo "The ID of $instance is $Instance_ID"
+    if [ $instance != "frontend" ]
+    then
+        IP=$(aws ec2 describe-instances --instance-ids $Instance_ID --query "Reservations[0].Instances[0].PrivateIpAddress" --output text)
+        Record_Name=$instance.$DNS_Name
+    else
+        IP=$(aws ec2 describe-instances --insrance-ids $Instance_ID --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+        Record_Name=$instance.$DNS_Name
+    fi
+    echo "$instance IP Address in $IP"   
 done
