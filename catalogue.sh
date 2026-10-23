@@ -60,8 +60,6 @@ fi
 echo "============Download application code to the created app directory=================="
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
 cd /app
-mkdir -p $FILE_NAME_$TIME
-mv /app/* /app/$FILE_NAME_$TIME
 cp /tmp/catalogue.zip /app
 unzip catalogue.zip &>>$LOGFILE_NAME
 VALIDATION $? "Downloaded and unzipped Catalogue application code"
@@ -90,7 +88,7 @@ dnf install mongodb-mongosh -y &>>$LOGFILE_NAME
 VALIDATION $? "Installing mongodb client"
 
 echo "===============Load Master Data====================="
-STATUS=$(mongosh --host mongodb.daws84s.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+STATUS=$(mongosh --host mongodb.shynudevops.shop --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 if [ $STATUS -lt 0 ]
 then
     mongosh --host mongodb.shynudevops.shop < /app/db/master-data.js &>>$LOG_FILENAME
