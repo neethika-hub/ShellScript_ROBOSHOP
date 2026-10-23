@@ -47,26 +47,6 @@ echo "==============Update Default ROOT password==========="
 mysql_secure_installation --set-root-pass $MYSQL_ROOT_PASSWORD
 VALIDATION $? "Updating Root Password"
 
-echo "==============Validate process======================"
-PROCESS_ID=$(ps -ef | grep mysqld | grep -v grep | wc -l)
-if [ $PROCESS_ID -eq 1 ]
-then
-    echo "The Process is UP" | tee -a $LOGFILE_NAME
-    VALIDATION $? "The Process"
-else
-    echo "The Process is NOT UP"
-fi
-
-echo "===============Validate Logs======================="
-ERROR_LOG=$(grep -i "error" /var/log/message | wc -l)
-if [ $ERROR_LOG -gt 0 ]
-then
-    echo "THERE IS A ERROR IN LOGS PLEASE CHECK!!!" | tee -a $LOGFILE_NAME
-    echo "MySQL IS NOT STARTED CORRECTLY" | tee -a $LOGFILE_NAME
-else
-    VALIDATION $? "MySQL Started without errors"
-fi
-
 END_TIME=$(date +%s)
 TOTAL_TIME=$(($END_TIME-$START_TIME))
 echo "Time taken for the script is $TOTAL_TIME ms"
