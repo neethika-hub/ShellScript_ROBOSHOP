@@ -31,6 +31,9 @@ else
     echo "You are in ROOT." | tee -a $LOGFILE_NAME
 fi
 
+echo "Enter Root password"
+read -s MYSQL_ROOT_PASSWORD
+
 echo "================Install MySQL======================"
 dnf install mysql-server -y &>>$LOGFILE_NAME
 VALIDATION $? "Installing MySQL"
@@ -41,7 +44,7 @@ systemctl start mysqld
 VALIDATION $? "Starting MySQL"
 
 echo "==============Update Default ROOT password==========="
-mysql_secure_installation --set-root-pass RoboShop@1
+mysql_secure_installation --set-root-pass $MYSQL_ROOT_PASSWORD
 VALIDATION $? "Updating Root Password"
 
 echo "==============Validate process======================"
