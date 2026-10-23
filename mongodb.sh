@@ -48,3 +48,6 @@ echo "===========Updating listen address============"
 cp /etc/mongod.conf /etc/mongod.conf_backup_$time
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
 Validation $? "Listen update address"
+
+echo "==========Restart mongodb===================="
+systemctl restart mongodb
