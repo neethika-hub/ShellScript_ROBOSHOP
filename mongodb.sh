@@ -55,4 +55,4 @@ Validation $? "Mongodb restart"
 
 end_time=$(date +%S)
 total_time=$(($end_time-$started_time))
-echo "Total time taken for the script is $total_time"
+echo "Total time taken for the script is $total_time ms"
