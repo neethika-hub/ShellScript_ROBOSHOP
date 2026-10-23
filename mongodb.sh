@@ -6,7 +6,7 @@ logfile=$(echo $0 | cut -d '.' -f1)
 logfile_name=$log_folder/$logfile.log
 echo $logfile_name
 time=$(date +%F-%H:%M:%S)
-started_time=$(date +%T)
+started_time=$(date +%S)
 echo "Script started at $started_time"
 Validation(){
 if [ $1 -ne 0 ]
@@ -53,6 +53,6 @@ echo "==========Restart mongodb===================="
 systemctl restart mongod
 Validation $? "Mongodb restart"
 
-end_time=$(date +%T)
+end_time=$(date +%S)
 total_time=$(($end_time-$started_time))
 echo "Total time taken for the script is $total_time"
