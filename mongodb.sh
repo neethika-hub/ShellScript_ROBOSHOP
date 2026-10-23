@@ -54,7 +54,7 @@ echo "==========Restart mongodb===================="
 systemctl restart mongod
 Validation $? "Mongodb restart"
 
-END_IME=$(date +%s)
+END_TIME=$(date +%s)
 echo "$END_TIME"
 TOTAL_TIME=$(($END_TIME-$START_TIME))
 echo "Total time taken for the script is $TOTAL_TIME ms" | tee -a $LOGFILE_NAME
