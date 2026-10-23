@@ -15,10 +15,10 @@ mkdir -p $LOG_FOLDER #-p will create if folder is not present or it will ignore 
 VALIDATION(){
 if [ $1 -ne 0 ]
 then
-    echo "$2 is FAILED" | tee -a $LOGFILE_NAME
+    echo "$2 is...FAILED" | tee -a $LOGFILE_NAME
     exit 1
 else
-    echo "$2 is SUCCESS" | tee -a $LOGFILE_NAME
+    echo "$2 is...SUCCESS" | tee -a $LOGFILE_NAME
 fi
 }
 
@@ -84,20 +84,20 @@ echo "==============Validate process======================"
 PROCESS_ID=$(ps -ef | grep /app/server.js | grep -v grep | wc -l)
 if [ $PROCESS_ID -eq 1 ]
 then
-    echo "The Process is UP"
+    echo "The Process is UP" | tee -a $LOGFILE_NAME
+    VALIDATION $? "The Application Process"
 else
-    echo "The Process is NOT UP"
+    echo "The Process is NOT UP" | tee -a $LOGFILE_NAME
 fi
 
 echo "===============Validate Logs======================="
 ERROR_LOG=$(grep -i "error" /var/log/message | wc -l)
 if [ $ERROR_LOG -gt 0 ]
 then
-    echo "THERE IS A ERROR IN LOGS PLEASE CHECK!!!"
-    echo "APPLCIATION IS NOT STARTED CORRECTLY"
+    echo "THERE IS A ERROR IN LOGS PLEASE CHECK!!!" | tee -a $LOGFILE_NAME
+    echo "APPLCIATION IS NOT STARTED CORRECTLY" | tee -a $LOGFILE_NAME
 else
-    echo "NO ERROR IN LOGS"
-    echo "APPLICATION STARTED PERFECTLY!!HURRAY!!"
+    VALIDATION $? "Application Started without errors"
 fi
 
 END_TIME=$(date +%s)
