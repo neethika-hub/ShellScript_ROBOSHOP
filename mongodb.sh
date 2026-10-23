@@ -4,6 +4,7 @@ user_id=$(id -u)
 log_folder=/var/log/roboshop
 logfile=$(echo $0 | cut -d '.' -f1)
 logfile_name=$log_folder/$logfile.log
+echo $logfile_name
 
 Validation(){
 if [ $1 -ne 0 ]
