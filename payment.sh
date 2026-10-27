@@ -90,6 +90,7 @@ then
     echo "THERE IS A ERROR IN LOGS PLEASE CHECK!!!" | tee -a $LOGFILE_NAME
     echo "APPLCIATION IS NOT STARTED CORRECTLY" | tee -a $LOGFILE_NAME
 else
+    echo $?
     VALIDATION $? "Application Started without errors"
 fi
 
