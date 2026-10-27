@@ -47,6 +47,7 @@ echo "===========Create System user============="
 id roboshop | tee -a $LOGFILE_NAME
 if [ $? -ne 0 ]
 then
+    echo "I am here"
     useradd --system --home /app --shell /sbin/nologin --comment "Roboshop System user" roboshop | tee -a $LOGFILE_NAME
     VALIDATION $? "Creating System User"
 else
