@@ -71,7 +71,7 @@ echo "=================Copy the Service file======================"
 cp $SCRIPT_PATH/shipping.service /etc/systemd/system/shipping.service
 VALIDATION $? "Copying Service file"
 
-echo "=================Enable & Start Application"
+echo "=================Enable & Start Application================="
 systemctl daemon-reload
 systemctl enable shipping
 systemctl start shipping
@@ -82,7 +82,7 @@ dnf install mysql -y &>>$LOGFILE_NAME
 VALIDATION $? "MySQL Client Instalaltion"
 
 echo "====================LOAD Data==============================="
-mysql -h mysql.shynudevops.shop -uroot -p$MySQL_ROOT_PASSWORD -e 'use cities' | tee -a $LOGFILE_NAME
+mysql -h mysql.shynudevops.shop -uroot -p$MySQL_ROOT_PASSWORD -e 'use cities'
 if [ $? -ne 0 ]
 then
     mysql -h mysql.shynudevops.shop -uroot -p$MySQL_ROOT_PASSWORD < /app/db/schema.sql
