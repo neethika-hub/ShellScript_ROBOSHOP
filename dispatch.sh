@@ -66,7 +66,7 @@ go build &>>$LOGFILE_NAME
 VALIDATION $? "Downloading Dependencies"
 
 echo "=============Copy dispatch service file============"
-cp $SCRIPT_PATH/dispatch.service /etc/systemcd/system/dispatch.service
+cp $SCRIPT_PATH/dispatch.service /etc/systemd/system/dispatch.service
 VALIDATION $? "Copying dispatch service file"
 
 echo "===========Start Dispatch Application============="
