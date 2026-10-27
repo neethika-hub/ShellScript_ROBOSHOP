@@ -75,7 +75,7 @@ VALIDATION $? "Starting Payment Application"
 
 echo "==============Validate process======================"
 PROCESS_ID=$(ps -ef | grep /app/payment.ini | grep -v grep | wc -l)
-if [ $PROCESS_ID -eq 1 ]
+if [ $PROCESS_ID -gt 1 ]
 then
     echo "The Process is UP" | tee -a $LOGFILE_NAME
     VALIDATION $? "The Application Process"
@@ -90,7 +90,6 @@ then
     echo "THERE IS A ERROR IN LOGS PLEASE CHECK!!!" | tee -a $LOGFILE_NAME
     echo "APPLCIATION IS NOT STARTED CORRECTLY" | tee -a $LOGFILE_NAME
 else
-    echo $?
     VALIDATION $? "Application Started without errors"
 fi
 
