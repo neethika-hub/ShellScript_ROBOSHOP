@@ -84,7 +84,7 @@ else
 fi
 
 echo "===============Validate Logs======================="
-ERROR_LOG=$(grep -i "error" /var/log/message | wc -l)
+ERROR_LOG=$(grep -i "error" /var/log/messages | wc -l)
 if [ $ERROR_LOG -gt 0 ]
 then
     echo "THERE IS A ERROR IN LOGS PLEASE CHECK!!!" | tee -a $LOGFILE_NAME
