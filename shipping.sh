@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 USER_ID=$(id -u)
 LOG_FOLDER=/var/log/roboshop
 FILE_NAME=$(echo $0 | cut -d '.' -f1)
@@ -44,7 +44,7 @@ VALIDATION $? "Creating app directory"
 
 echo "===========Create System user============="
 
-id roboshop | tee -a $LOGFILE_NAME
+id roboshop 
 if [ $? -ne 0 ]
 then
     useradd --system --home /app --shell /sbin/nologin --comment "Roboshop System user" roboshop | tee -a $LOGFILE_NAME
