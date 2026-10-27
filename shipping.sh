@@ -43,10 +43,11 @@ mkdir -p /app
 VALIDATION $? "Creating app directory"
 
 echo "===========Create System user============="
+
 id roboshop | tee -a $LOGFILE_NAME
 if [ $? -ne 0 ]
 then
-    useradd --system --home /app --shell /sbin/nologin --comment "Roboshop System user" roboshop
+    useradd --system --home /app --shell /sbin/nologin --comment "Roboshop System user" roboshop | tee -a $LOGFILE_NAME
     VALIDATION $? "Creating System User"
 else
     echo "System User is already Present" | tee -a $LOGFILE_NAME
